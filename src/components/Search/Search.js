@@ -37,7 +37,7 @@ const Search = () => {
     } catch (err) {
       console.log("err");
     }
-  }, [dispatch]);
+  }, [input, dispatch]);
 
   const getLocationDetail = (e) => {
     e.preventDefault();
