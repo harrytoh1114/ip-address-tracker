@@ -10,7 +10,7 @@ function App() {
       <header className="header">
         <Search />
       </header>
-      {result ? <Location /> : ""}
+      {result.coor ? <Location /> : ""}
     </div>
   );
 }

@@ -8,9 +8,11 @@
   left: 50%;
   transform: translateX(-50%);
   width: 70%;
-  max-width: 95rem;
+  min-width: 75rem;
+  max-width: 100rem;
   background-color: $color-white;
   box-shadow: 0 0.5rem 0.5rem rgba($color-black, 0.2);
+  z-index: 10;
 
   display: flex;
 
@@ -40,5 +42,27 @@
   &__detail {
     font-weight: $font-medium;
     font-size: 2.3rem;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .location {
+    flex-direction: column;
+    min-width: 33.8rem;
+    text-align: center;
+
+    & > * {
+      width: 100%;
+
+      &:not(:first-child) {
+        border-left: none;
+        padding: 0;
+        margin-left: 0;
+      }
+     
+      &:not(:last-child) {
+        margin-bottom: 2rem;
+      }
+    }
   }
 }

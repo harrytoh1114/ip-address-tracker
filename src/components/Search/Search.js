@@ -19,7 +19,6 @@ const Search = () => {
             input
         )
         .then((response) => {
-          console.log(response);
           dispatch(
             resultAction.setResult({
               ip: response.data.ip,
@@ -28,7 +27,10 @@ const Search = () => {
               postalCode: response.data.location.postalCode,
               timezone: response.data.location.timezone,
               isp: response.data.isp,
-              coor: [response.data.location.lat, response.data.location.lng],
+              coor: [
+                parseFloat(response.data.location.lat),
+                parseFloat(response.data.location.lng),
+              ],
             })
           );
         });
@@ -54,7 +56,10 @@ const Search = () => {
               postalCode: response.data.location.postalCode,
               timezone: response.data.location.timezone,
               isp: response.data.isp,
-              coor: [response.data.location.lat, response.data.location.lng],
+              coor: [
+                parseFloat(response.data.location.lat),
+                parseFloat(response.data.location.lng),
+              ],
             })
           );
         });

@@ -1,12 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  useMapEvents,
+} from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import { Locater } from "./Locater";
 import "./Location.scss";
 
 const Location = () => {
   const result = useSelector((state) => state.result.r);
-  console.log(result.coor);
+  const [position, setPosition] = useState(null);
+
+  function LocationMarker() {
+    const map = useMapEvents({
+      locationfound(e) {
+        setPosition(result.coor);
+        map.flyTo(result.coor, map.getZoom());
+      },
+    });
+
+    map.locate();
+
+    return position === null ? null : (
+      <Marker position={position} icon={Locater}>
+        <Popup>You are here</Popup>
+      </Marker>
+    );
+  }
   return (
     <>
       <div className="location">
@@ -37,17 +61,13 @@ const Location = () => {
       <MapContainer
         center={result.coor}
         zoom={13}
-        style={{ width: "100vw", height: "auto" }}
+        style={{ width: "100%", height: "70vh", zIndex: "1" }}
       >
         <TileLayer
-          attribution='<a href="https://www.maptiler.org/copyright">OpenStreetMap</a> contributors'
+          attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
           url="https://api.maptiler.com/maps/basic-v2/256/{z}/{x}/{y}.png?key=j38hruQGH50ysDJ9aOAv"
         />
-        <Marker position={result.coor}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker>
+        <LocationMarker />
       </MapContainer>
     </>
   );

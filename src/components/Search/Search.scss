@@ -27,7 +27,7 @@
 
   &__bar {
     border: none;
-    padding: 1.5rem 2rem;
+    padding: 2rem 2.5rem;
     width: 100%;
     margin: 0 auto;
     font-size: $font-default;
@@ -45,5 +45,18 @@
     border: none;
     background-color: $color-black;
     padding: 0 2rem;
+    transition: all .2s;
+
+    &:hover {
+      background-color: $very-dark-gray;
+      cursor: pointer;
+    }
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .search {
+    min-width: 33.8rem;
+    top: 40%;
   }
 }
